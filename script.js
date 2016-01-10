@@ -1,13 +1,19 @@
 var canvas = document.getElementById("mainCanvas");
-var context = canvas.getContext("2d");
-var keys = [];
-var touches = {x1: undefined, y1: undefined, x2: undefined, y2: undefined}
-var width = canvas.width, speed = 4, height = canvas.height;
-var player = {x: 40, y: 40, width: 20, height: 20};
-var npc = {x: Math.random() * (width - 20), y: Math.random() * (height - 20), width: 20, height: 20};
-var score = 0;
 canvas.width = window.innerWidth - 20;
 canvas.height = window.innerHeight - 40;
+var context = canvas.getContext("2d");
+
+var keys = [];
+var touches = {x1: undefined, y1: undefined, x2: undefined, y2: undefined}
+
+
+var width = canvas.width, speed = 4, height = canvas.height;
+
+var player = {x: 40, y: 40, width: 20, height: 20};
+
+var npc = {x: Math.random() * (width - 20), y: Math.random() * (height - 20), width: 20, height: 20};
+
+var score = 0;
 
 window.addEventListener("keydown",  function(e){
          keys[e.keyCode] = true;
@@ -17,6 +23,12 @@ window.addEventListener("keyup",  function(e){
          delete keys[e.keyCode];
 }, false);
 
+/*
+up - 38
+down - 40
+left - 37
+right - 39
+*/
 window.addEventListener("touchstart", function(e){
   if (!(e.changedTouches == undefined))
   touches.x1 = parseInt(e.changedTouches[0].clientX)
@@ -32,17 +44,6 @@ document.addEventListener("touchmove", function(e) {
   e.preventDefault();
 }, false)
 
-function touchMovement(){
-
-  if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
-  //left
-  if (touches.x2 - touches.x1 > 30) player.x+=speed;
-  if (touches.x2 - touches.x1 < 30) player.x-=speed;
-  if (touches.y2 - touches.y1 > 30) player.y+=speed;
-  if (touches.y2 - touches.y1 < 30) player.y-=speed;
-    ;
-}
-
 function game(){
    update();
    render();
@@ -56,6 +57,15 @@ function update(){
   if(collisionRect(player, npc)) processCollision();
   quadrantRun(player, npc, 80);
 }
+function
+ touchMovement(){
+
+  if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
+  //left
+    if (touches.x1 < touches.x2) player.x+=speed;
+    if (touches.x1 > touches.x2) player.x-=speed;
+      ;
+}
 
 function render(){
   clearCanvas();
@@ -67,10 +77,11 @@ function render(){
 }
 
 function quadrantRun(player, npc, distance){
-  if((player.x >= npc.x)) npc.x = npc.x - (speed / 2);
-  if((player.x < npc.x)) npc.x = npc.x + (speed / 2);
-  if((player.y >= npc.y)) npc.y = npc.y - (speed / 2);
-  if((player.y < npc.y)) npc.y = npc.y + (speed / 2);
+  //normal running outside of the cross
+  if((player.x >= npc.x)) npc.x = npc.x - (speed * 2 / 3);
+  if((player.x < npc.x)) npc.x = npc.x + (speed * 2 / 3);
+  if((player.y >= npc.y)) npc.y = npc.y - (speed * 2 / 3);
+  if((player.y < npc.y)) npc.y = npc.y + (speed * 2 / 3);
 
 }
 
