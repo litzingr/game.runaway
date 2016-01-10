@@ -4,6 +4,7 @@ canvas.height = window.innerHeight - 40;
 var context = canvas.getContext("2d");
 
 var keys = [];
+var touches = {x1: undefined, y1: undefined, x2: undefined, y2: undefined}
 
 
 var width = canvas.width, speed = 4, height = canvas.height;
@@ -28,6 +29,31 @@ down - 40
 left - 37
 right - 39
 */
+window.addEventListener("touchstart", function(e){
+  if (!(e.changedTouches == undefined))
+  touches.x1 = parseInt(e.changedTouches[0].clientX)
+  touches.y1 = parseInt(e.changedTouches[0].clientY);
+}, false)
+
+window.addEventListener("touchend", function(e){
+  touches.x2 = parseInt(e.changedTouches[0].clientX)
+  touches.y2 = parseInt(e.changedTouches[0].clientY);
+}, false)
+
+document.addEventListener("touchmove", function(e) {
+  e.preventDefault();
+}, false)
+
+function touchMovement(){
+
+  if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
+  //left
+  if (touches.x2 - touches.x1 > 30) player.x+=speed;
+  if (touches.x2 - touches.x1 < 30) player.x-=speed;
+  if (touches.y2 - touches.y1 > 30) player.y+=speed;
+  if (touches.y2 - touches.y1 < 30) player.y-=speed;
+    ;
+}
 
 function game(){
    update();
@@ -36,6 +62,7 @@ function game(){
 
 function update(){
   keyMovement();
+  touchMovement();
   bounds(player, 0);
   bounds(npc, 100);
   if(collisionRect(player, npc)) processCollision();
