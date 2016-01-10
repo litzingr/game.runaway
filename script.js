@@ -62,8 +62,11 @@ function
 
   if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
   //left
-    if (touches.x1 < touches.x2) player.x+=speed;
-    if (touches.x1 > touches.x2) player.x-=speed;
+    if ((touches.x1 < touches.x2) && (Math.abs(touches.x1 - touches.x2)/canvas.width > 0.25)) player.x+=speed;
+    if ((touches.x1 > touches.x2) && (Math.abs(touches.x1 - touches.x2)/canvas.width > 0.25)) player.x-=speed;
+    if ((touches.y1 < touches.y2) && (Math.abs(touches.y1 - touches.y2)/canvas.height > 0.25)) player.y+=speed;
+    if ((touches.y1 > touches.y2) && (Math.abs(touches.y1 - touches.y2)/canvas.height > 0.25)) player.y-=speed;
+    if ((Math.abs(touches.y1 - touches.y2)/canvas.height < 0.25) && (Math.abs(touches.x1 - touches.x2)/canvas.width < 0.25)) ;
       ;
 }
 
