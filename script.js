@@ -44,18 +44,6 @@ document.addEventListener("touchmove", function(e) {
   e.preventDefault();
 }, false)
 
-function touchMovement(){
-
-  if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
-  console.log(touches.y);
-  //left
-    if (touches.x < (canvas.width / 3)) player.x-=speed;
-    if (touches.x > (canvas.width * 2 / 3)) player.x+=speed;
-    if ((touches.x < (canvas.width * 2 / 3)) && (touches.x > (canvas.width / 3)) && (touches.y <= (canvas.height /2))) player.y-=speed;
-    if ((touches.x < (canvas.width * 2 / 3)) && (touches.x > (canvas.width / 3)) && (touches.y > (canvas.height /2))) player.y+=speed;
-  ;
-}
-
 function game(){
    update();
    render();
@@ -63,10 +51,20 @@ function game(){
 
 function update(){
   keyMovement();
+  touchMovement();
   bounds(player, 0);
   bounds(npc, 100);
   if(collisionRect(player, npc)) processCollision();
   quadrantRun(player, npc, 80);
+}
+function
+ touchMovement(){
+
+  if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
+  //left
+    if (touches.x1 < touches.x2) player.x+=speed;
+    if (touches.x1 > touches.x2) player.x-=speed;
+      ;
 }
 
 function render(){
@@ -80,13 +78,10 @@ function render(){
 
 function quadrantRun(player, npc, distance){
   //normal running outside of the cross
-  if((player.x >= npc.x)) npc.x = npc.x - (speed / 2);
-  if((player.x < npc.x)) npc.x = npc.x + (speed / 2);
-  if((player.y >= npc.y)) npc.y = npc.y - (speed / 2);
-  if((player.y < npc.y)) npc.y = npc.y + (speed / 2);
-
-  //opposite running if inside the cross on certain sides
-  //if((player.x - distance > npc.x) && (player.x >= npc.x) && (npc.x <= canvas.width)) npc.x = npc.x + speed;
+  if((player.x >= npc.x)) npc.x = npc.x - (speed * 2 / 3);
+  if((player.x < npc.x)) npc.x = npc.x + (speed * 2 / 3);
+  if((player.y >= npc.y)) npc.y = npc.y - (speed * 2 / 3);
+  if((player.y < npc.y)) npc.y = npc.y + (speed * 2 / 3);
 
 }
 
