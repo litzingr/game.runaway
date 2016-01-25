@@ -7,15 +7,21 @@ var keys = [];
 var touches = {x1: undefined, y1: undefined, x2: undefined, y2: undefined}
 
 
-var width = canvas.width, speed = 4, height = canvas.height;
 
-var player = {x: 40, y: 40, width: 20, height: 20};
+var width = canvas.width, speed = width * .005, height = canvas.height;
 
-var npc = {x: Math.random() * (width - 20), y: Math.random() * (height - 20), width: 20, height: 20};
+var characterheight = width * .03, characterwidth = width * .03;
+
+var player = {x: 40, y: 40, width: characterwidth, height: characterheight};
+
+var npc = {x: Math.random() * (width - characterwidth), y: Math.random() * (height - characterheight), width: characterwidth, height: characterheight};
 
 var score = 0;
 
 var uncertainty = 0.1;
+
+var fontsize = 32;
+
 
 window.addEventListener("keydown",  function(e){
          keys[e.keyCode] = true;
@@ -55,7 +61,7 @@ function update(){
   keyMovement();
   touchMovement();
   bounds(player, 0);
-  bounds(npc, 100);
+  bounds(npc, width * .1);
   if(collisionRect(player, npc)) processCollision();
   quadrantRun(player, npc, 80);
 }
@@ -75,8 +81,8 @@ function
 function render(){
   clearCanvas();
 
-  makeCharacter(player, "blue")
-  makeCharacter(npc, "green")
+  makeCharacter(player, "lightgreen")
+  makeCharacter(npc, "red")
   makeScore(score)
 
 }
@@ -91,9 +97,9 @@ function quadrantRun(player, npc, distance){
 }
 
 function makeScore(score){
-  context.fillStyle = "black";
-  context.font = "bold 32px CharterBT"
-  context.fillText(score, canvas.width / 2, 30);
+  context.fillStyle = "white";
+  context.font = "bold " + (.1 * height) + "px CharterBT"
+  context.fillText(score, canvas.width / 2, .1 * height + 2);
 }
 
 function makeCharacter(character, color) {
