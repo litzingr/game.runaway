@@ -1,3 +1,5 @@
 #mainCanvas{
-  background-color: #bcbcbc;
+  /* background-image: url("source/background.png"); */
+  background-size: 100%;
+  background-color: navy;
 }
