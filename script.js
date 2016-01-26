@@ -30,6 +30,7 @@ down - 40
 left - 37
 right - 39
 */
+
 window.addEventListener("touchstart", function(e){
   if (!(e.changedTouches == undefined))
   touches.x1 = parseInt(e.changedTouches[0].clientX)
@@ -50,6 +51,15 @@ function game(){
    render();
 }
 
+function render(){
+  clearCanvas();
+
+  makeCharacter(player, "rgb(16, 39, 190)")
+  makeCharacter(npc, "rgb(20, 255, 0)")
+  makeCharacter(npc2, "rgb(255, 0, 0)")
+  makeScore(score)
+}
+
 function update(){
   keyMovement();
   touchMovement();
@@ -61,9 +71,8 @@ function update(){
   quadrantRun(player, npc, 80);
   quadrantChase(player, npc2, 80);
 }
-function
- touchMovement(){
 
+function touchMovement(){
   if (!(touches.x1 == undefined) && !(touches.y1 == undefined) && !(touches.x2 == undefined) && !(touches.y2 == undefined))
   //left
     if ((touches.x1 < touches.x2) && (Math.abs(touches.x1 - touches.x2)/canvas.width > uncertainty)) player.x+=speed;
@@ -71,18 +80,10 @@ function
     if ((touches.y1 < touches.y2) && (Math.abs(touches.y1 - touches.y2)/canvas.height > uncertainty)) player.y+=speed;
     if ((touches.y1 > touches.y2) && (Math.abs(touches.y1 - touches.y2)/canvas.height > uncertainty)) player.y-=speed;
     if ((Math.abs(touches.y1 - touches.y2)/canvas.height < uncertainty) && (Math.abs(touches.x1 - touches.x2)/canvas.width < 0.25)) ;
-      ;
+    ;
 }
 
-function render(){
-  clearCanvas();
 
-  makeCharacter(player, "rgb(51, 190, 16)")
-  makeCharacter(npc, "rgb(255, 0, 0)")
-  makeCharacter(npc2, "rgb(255, 0, 0)")
-  makeScore(score)
-
-}
 
 function quadrantRun(player, npc, distance){
   //normal running outside of the cross
