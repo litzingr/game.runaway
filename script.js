@@ -60,6 +60,7 @@ function render(){
   makeScore(score)
 }
 
+
 function update(){
   keyMovement();
   touchMovement();
