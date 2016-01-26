@@ -6,20 +6,13 @@ var context = canvas.getContext("2d");
 var keys = [];
 var touches = {x1: undefined, y1: undefined, x2: undefined, y2: undefined}
 
-
-
 var width = canvas.width, speed = width * .005, height = canvas.height;
-
 var characterheight = width * .03, characterwidth = width * .03;
-
 var player = {x: 40, y: 40, width: characterwidth, height: characterheight};
-
 var npc = {x: Math.random() * (width - characterwidth), y: Math.random() * (height - characterheight), width: characterwidth, height: characterheight};
-
+var npc2 = {x: Math.random() * (width - characterwidth), y: Math.random() * (height - characterheight), width: characterwidth, height: characterheight};
 var score = 0;
-
 var uncertainty = 0.1;
-
 var fontsize = 32;
 
 
@@ -61,9 +54,12 @@ function update(){
   keyMovement();
   touchMovement();
   bounds(player, 0);
-  bounds(npc, width * .1);
+  bounds(npc, width * .15);
+  bounds(npc2, width * .1);
   if(collisionRect(player, npc)) processCollision();
+  if(collisionRect(player, npc2)) processHurt();
   quadrantRun(player, npc, 80);
+  quadrantChase(player, npc2, 80);
 }
 function
  touchMovement(){
@@ -81,8 +77,9 @@ function
 function render(){
   clearCanvas();
 
-  makeCharacter(player, "lightgreen")
-  makeCharacter(npc, "red")
+  makeCharacter(player, "rgb(51, 190, 16)")
+  makeCharacter(npc, "rgb(255, 0, 0)")
+  makeCharacter(npc2, "rgb(255, 0, 0)")
   makeScore(score)
 
 }
@@ -93,6 +90,15 @@ function quadrantRun(player, npc, distance){
   if((player.x < npc.x)) npc.x = npc.x + (speed * 2 / 3);
   if((player.y >= npc.y)) npc.y = npc.y - (speed * 2 / 3);
   if((player.y < npc.y)) npc.y = npc.y + (speed * 2 / 3);
+
+}
+
+function quadrantChase(player, npc, distance){
+  //normal running outside of the cross
+  if((player.x >= npc.x)) npc.x = npc.x + (speed * 2 / 3);
+  if((player.x < npc.x)) npc.x = npc.x - (speed * 2 / 3);
+  if((player.y >= npc.y)) npc.y = npc.y + (speed * 2 / 3);
+  if((player.y < npc.y)) npc.y = npc.y - (speed * 2 / 3);
 
 }
 
@@ -129,6 +135,12 @@ function processCollision(){
   score++;
   npc.x = Math.random() * (width - 20);
   npc.y = Math.random() * (height - 20);
+}
+
+function processHurt(){
+  score--;
+  npc2.x = Math.random() * (width - 20);
+  npc2.y = Math.random() * (height - 20);
 }
 
 function collisionRect(first, second){
