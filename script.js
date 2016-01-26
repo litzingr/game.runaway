@@ -1,5 +1,6 @@
 /*jslint browser:true */
 var canvas = document.getElementById("mainCanvas");
+var cookie = document.cookie;
 canvas.width = window.innerWidth - 20;
 canvas.height = window.innerHeight - 40;
 var context = canvas.getContext("2d");
@@ -39,7 +40,6 @@ var score = 0;
 var uncertainty = 0.1;
 var fontsize = 32;
 var highscore = 0;
-
 
 window.addEventListener("keydown", function (e) {
     "use strict";
