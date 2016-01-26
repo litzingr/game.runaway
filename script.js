@@ -249,4 +249,4 @@ function game() {
 setInterval(function () {
     "use strict";
     game();
-}, 1000/60);
+}, 1000 / 60);
