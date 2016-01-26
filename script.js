@@ -54,7 +54,7 @@ function game(){
 function render(){
   clearCanvas();
 
-  makeCharacter(player, "rgb(16, 39, 190)")
+  makeCharacter(player, "rgb(21, 206, 246)")
   makeCharacter(npc, "rgb(20, 255, 0)")
   makeCharacter(npc2, "rgb(255, 0, 0)")
   makeScore(score)
