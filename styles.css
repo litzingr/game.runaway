@@ -1,5 +1,6 @@
-#mainCanvas{
-  /* background-image: url("source/background.png"); */
-  background-size: 100%;
-  background-color: black;
+#mainCanvas {
+    /* background-image: url("source/background.png"); */
+
+    background-size: 100%;
+    background-color: black;
 }
