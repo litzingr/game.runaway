@@ -209,10 +209,12 @@ function collisionRect(first, second) {
 
 function shrinkPlayer() {
         if (score > 15) {
-                player.width: (characterwidth * 0.75),
-                player.height: (characterheight * 0.75),
-                
-        };
+                player.width: (characterwidth * 0.75);
+                player.height: (characterheight * 0.75);
+        } else {
+                player.width: characterwidth;
+                player.height: characterheight;
+        }
 }
 
 function updateHScore() {
