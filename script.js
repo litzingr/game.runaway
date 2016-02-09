@@ -30,11 +30,6 @@ var player = {
         width: characterwidth,
         height: characterheight
     };
-    
-if (score > 15) {
-        player.width: (characterwidth * 0.75),
-        player.height: (characterheight * 0.75),
-};
         
 var npc = {
         x: Math.random() * (width - characterwidth),
@@ -217,6 +212,14 @@ function updateHScore() {
     if (score > highscore) {
         highscore = score;
     }
+}
+
+function shrinkPlayer() {
+        if (score > 15) {
+                player.width: (characterwidth * 0.75),
+                player.height: (characterheight * 0.75),
+                
+        };
 }
 
 function render() {
