@@ -207,15 +207,13 @@ function collisionRect(first, second) {
     first.y + first.height < second.y);
 }
 
-/*function shrinkPlayer() {
+function shrinkPlayer() {
         if (score > 15) {
-                player.width: (characterwidth * 0.75);
-                player.height: (characterheight * 0.75);
+                player = {x: 40, y: 40, width: characterwidth, height: characterheight}
         } else {
-                player.width: characterwidth;
-                player.height: characterheight;
+                player = {x: 40, y: 40, width: characterwidth * 0.75, height: characterheight * 0.75}
         }
-}*/
+}
 
 function updateHScore() {
     "use strict";
