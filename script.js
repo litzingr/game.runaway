@@ -209,9 +209,9 @@ function collisionRect(first, second) {
 
 function shrinkPlayer() {
         if (score > 2) {
-                player = {x: 40, y: 40, width: characterwidth * 0.75, height: characterheight * 0.75}
+                player = {player.x, player.y, width: characterwidth * 0.75, height: characterheight * 0.75}
         } else {
-                player = {x: 40, y: 40, width: characterwidth, height: characterheight}
+                player = {player.x, player.y, width: characterwidth, height: characterheight}
         }
 }
 
