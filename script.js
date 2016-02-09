@@ -207,7 +207,7 @@ function collisionRect(first, second) {
     first.y + first.height < second.y);
 }
 
-function shrinkPlayer() {
+/*function shrinkPlayer() {
         if (score > 15) {
                 player.width: (characterwidth * 0.75);
                 player.height: (characterheight * 0.75);
@@ -215,14 +215,14 @@ function shrinkPlayer() {
                 player.width: characterwidth;
                 player.height: characterheight;
         }
-}
+}*/
 
 function updateHScore() {
     "use strict";
     if (score > highscore) {
         highscore = score;
     };
-    shrinkPlayer();
+    //shrinkPlayer();
 }
 
 function render() {
