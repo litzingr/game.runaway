@@ -27,14 +27,15 @@ var highscore = 0;
 var player = {
         x: 40,
         y: 40,
-        if (score > 15) {
-        width: (characterwidth * 0.75),
-        height: (characterheight * 0.75),
-        } else {
         width: characterwidth,
         height: characterheight
-        };
     };
+    
+if (score > 15) {
+        player.width: (characterwidth * 0.75),
+        player.height: (characterheight * 0.75),
+};
+        
 var npc = {
         x: Math.random() * (width - characterwidth),
         y: Math.random() * (height - characterheight),
