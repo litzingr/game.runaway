@@ -185,7 +185,7 @@ function keyMovement() {
     }
 }
 
-function processCollision() {
+function processPoint() {
     "use strict";
     score = score + 1;
     npc.x = Math.random() * (width - 20);
@@ -250,7 +250,7 @@ function update() {
     bounds(npc, width * 0.15);
     bounds(npc2, width * 0.1);
     if (collisionRect(player, npc)) {
-        processCollision();
+        processPoint();
     }
     if (collisionRect(player, npc2)) {
         processHurt();
