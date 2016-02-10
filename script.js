@@ -18,12 +18,19 @@ var speed = width * 0.005;
 var height = canvas.height;
 var characterheight = width * 0.03;
 var characterwidth = width * 0.03;
+
+var score = 0;
+var uncertainty = 0.1;
+var fontsize = 32;
+var highscore = 0;
+
 var player = {
         x: 40,
         y: 40,
         width: characterwidth,
         height: characterheight
     };
+        
 var npc = {
         x: Math.random() * (width - characterwidth),
         y: Math.random() * (height - characterheight),
@@ -36,10 +43,6 @@ var npc2 = {
         width: characterwidth,
         height: characterheight
     };
-var score = 0;
-var uncertainty = 0.1;
-var fontsize = 32;
-var highscore = 0;
 
 window.addEventListener("keydown", function (e) {
     "use strict";
@@ -211,11 +214,20 @@ function collisionRect(first, second) {
     first.y + first.height < second.y);
 }
 
+/*function shrinkPlayer() {
+        if (score > 2) {
+                player = {player.x, player.y, width: characterwidth * 0.75, height: characterheight * 0.75}
+        } else {
+                player = {player.x, player.y, width: characterwidth, height: characterheight}
+        }
+}*/
+
 function updateHScore() {
     "use strict";
     if (score > highscore) {
         highscore = score;
-    }
+    };
+    //shrinkPlayer();
 }
 
 function render() {
