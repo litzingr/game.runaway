@@ -196,6 +196,13 @@ function processHurt() {
     npc2.y = Math.random() * (height - 20);
 }
 
+function processEaster() {
+    "use strict";
+    score = score + 10;
+    npc2.x = Math.random() * (width - 20);
+    npc2.y = Math.random() * (height - 20);
+}
+
 function collisionRect(first, second) {
     "use strict";
     return !(first.x > second.x + second.width ||
@@ -235,6 +242,9 @@ function update() {
     }
     if (collisionRect(player, npc2)) {
         processHurt();
+    }
+    if (collisionRect(npc, npc2)) {
+        processEaster();
     }
     quadrantRun(player, npc);
     quadrantChase(player, npc2);
