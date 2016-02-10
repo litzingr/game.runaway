@@ -2,7 +2,7 @@
 var canvas = document.getElementById("mainCanvas");
 var cookie = document.cookie;
 canvas.width = window.innerWidth - 20;
-canvas.height = window.innerHeight - 40;
+canvas.height = window.innerHeight - 20;
 var context = canvas.getContext("2d");
 
 var keys = [];
