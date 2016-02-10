@@ -256,7 +256,7 @@ function render() {
     makeScore(score);
     updateHScore();
     makeHighScore();
-
+    shrinkPlayer(score);
 }
 
 
@@ -276,7 +276,6 @@ function update() {
     if (collisionRect(npc, npc2)) {
         processEaster();
     }
-    shrinkPlayer(score);
     quadrantRun(player, npc);
     quadrantChase(player, npc2);
 }
