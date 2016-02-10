@@ -2,7 +2,7 @@
 var canvas = document.getElementById("mainCanvas");
 var cookie = document.cookie;
 canvas.width = window.innerWidth - 20;
-canvas.height = window.innerHeight - 40;
+canvas.height = window.innerHeight - 20;
 var context = canvas.getContext("2d");
 
 var keys = [];
@@ -199,6 +199,13 @@ function processHurt() {
     npc2.y = Math.random() * (height - 20);
 }
 
+function processEaster() {
+    "use strict";
+    score = score + 10;
+    npc2.x = Math.random() * (width - 20);
+    npc2.y = Math.random() * (height - 20);
+}
+
 function collisionRect(first, second) {
     "use strict";
     return !(first.x > second.x + second.width ||
@@ -247,6 +254,9 @@ function update() {
     }
     if (collisionRect(player, npc2)) {
         processHurt();
+    }
+    if (collisionRect(npc, npc2)) {
+        processEaster();
     }
     quadrantRun(player, npc);
     quadrantChase(player, npc2);
