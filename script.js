@@ -34,14 +34,14 @@ function shrinkPlayer(score) {
     if (score >= 0 && score < 35) {
         characterHeight = width * 0.03 * ((100-(2*score))/100);
         characterWidth = width * 0.03 * ((100-(2*score))/100);
-        player.height = characterHeight;
-        player.width = characterWidth;
-    } else if (score >= 0 && score < 70) {
+        npc.height = characterHeight;
+        npc.width = characterWidth;
+    } /* else if (score >= 0 && score < 70) {
         npcCharacterHeight = width * 0.03 * ((100-(2*(score-35)))/100);
         npcCharacterWidth = width * 0.03 * ((100-(2*(score-35)))/100);
         npc.height = npcCharacterHeight;
         npc.width = npcCharacterWidth;
-    } else {
+    }*/ else {
         player.height = characterHeight;
         player.width = characterWidth;
         npc.height = npcCharacterHeight;
