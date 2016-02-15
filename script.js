@@ -59,7 +59,6 @@ function shrinkPlayer(score) {
     }
 }
 
-
 var score = 0;
 var uncertainty = 0.1;
 var fontsize = 32;
