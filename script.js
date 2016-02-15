@@ -45,6 +45,13 @@ var npc2 = {
     height: npc2CharacterHeight
 };
 
+var token = {
+    x: Math.random() * (width - width * 0.01),
+    y: Math.random() * (height - width * 0.01),
+    width: width * 0.01,
+    height: width * 0.01
+}
+
 function shrinkPlayer(score) {
     if (score >= 0 && score <= 35) {
         npcCharacterHeight = width * 0.03 * ((100-(2*score))/100);
@@ -146,20 +153,6 @@ function quadrantChase(player, npc) {
     }
 }
 
-function makeScore(score) {
-    "use strict";
-    context.fillStyle = "white";
-    context.font = "bold " + (0.05 * width) + "px CharterBT";
-    context.fillText(score, canvas.width / 2, 0.1 * height + 2);
-}
-
-function makeHighScore() {
-    "use strict";
-    context.fillStyle = "white";
-    context.font = "bold " + (0.05 * width) + "px CharterBT";
-    context.fillText(highscore, canvas.width * 2 / 3, 0.1 * height + 2);
-}
-
 function makeCharacter(character, color) {
     "use strict";
     context.fillStyle = color;
@@ -206,6 +199,8 @@ function keyMovement() {
     }
 }
 
+
+/* ======== REACTION/SCORING FUNCTIONS ======== */
 function processPoint() {
     "use strict";
     score = score + 1;
@@ -227,12 +222,30 @@ function processEaster() {
     npc2.y = Math.random() * (height - 20);
 }
 
+function processToken() {
+    //insert perks here to be earned on token-touch
+}
+
 function collisionRect(first, second) {
     "use strict";
     return !(first.x > second.x + second.width ||
     first.x + first.width < second.x ||
     first.y > second.y + second.height ||
     first.y + first.height < second.y);
+}
+
+function makeScore(score) {
+    "use strict";
+    context.fillStyle = "white";
+    context.font = "bold " + (0.05 * width) + "px CharterBT";
+    context.fillText(score, canvas.width / 2, 0.1 * height + 2);
+}
+
+function makeHighScore() {
+    "use strict";
+    context.fillStyle = "white";
+    context.font = "bold " + (0.05 * width) + "px CharterBT";
+    context.fillText(highscore, canvas.width * 2 / 3, 0.1 * height + 2);
 }
 
 function updateHScore() {
@@ -242,12 +255,15 @@ function updateHScore() {
     };
 }
 
+
+/* ======== GAME INITIALIZATION FUNCTIONS ======== */
 function render() {
     "use strict";
     clearCanvas();
     makeCharacter(player, "rgb(21, 206, 246)");
     makeCharacter(npc, "rgb(20, 255, 0)");
     makeCharacter(npc2, "rgb(255, 0, 0)");
+    makeCharacter(token);
     makeScore(score);
     updateHScore();
     makeHighScore();
@@ -270,6 +286,9 @@ function update() {
     }
     if (collisionRect(npc, npc2)) {
         processEaster();
+    }
+    if (collisionRect(player, token)) {
+        processToken();
     }
     quadrantRun(player, npc);
     quadrantChase(player, npc2);
