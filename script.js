@@ -21,6 +21,8 @@ var characterHeight = width * 0.03;
 var characterWidth = width * 0.03;
 var npcCharacterHeight = width * 0.03;
 var npcCharacterWidth = width * 0.03;
+var npc2CharacterHeight = width * 0.03;
+var npc2CharacterWidth = width * 0.03;
 
 var player = {
     x: 40,
@@ -29,23 +31,31 @@ var player = {
     height: characterHeight
 };
 
+var npc = {
+    x: Math.random() * (width - npcCharacterWidth),
+    y: Math.random() * (height - npcCharacterHeight),
+    width: npcCharacterWidth,
+    height: npcCharacterHeight
+};
+
+var npc2 = {
+    x: Math.random() * (width - npc2CharacterWidth),
+    y: Math.random() * (height - npc2CharacterHeight),
+    width: npc2CharacterWidth,
+    height: npc2CharacterHeight
+};
 
 function shrinkPlayer(score) {
-    if (score >= 0 && score < 35) {
-        characterHeight = width * 0.03 * ((100-(2*score))/100);
-        characterWidth = width * 0.03 * ((100-(2*score))/100);
-        player.height = characterHeight;
-        player.width = characterWidth;
+    if (score >= 0 && score <= 35) {
+        npcCharacterHeight = width * 0.03 * ((100-(2*score))/100);
+        npcCharacterWidth = width * 0.03 * ((100-(2*score))/100);
+        npc.height = npcCharacterHeight;
+        npc.width = npcCharacterWidth;
     } else if (score >= 0 && score < 70) {
-        npcCharacterHeight = width * 0.03 * ((100-(2*(score-35)))/100);
-        npcCharacterWidth = width * 0.03 * ((100-(2*(score-35)))/100);
-        npc.height = npcCharacterHeight;
-        npc.width = npcCharacterWidth;
-    } else {
+        characterHeight = width * 0.03 * ((100-(2*(score-35)))/100);
+        characterWidth = width * 0.03 * ((100-(2*(score-35)))/100);
         player.height = characterHeight;
         player.width = characterWidth;
-        npc.height = npcCharacterHeight;
-        npc.width = npcCharacterWidth;
     }
 }
 
@@ -55,20 +65,6 @@ var uncertainty = 0.1;
 var fontsize = 32;
 var highscore = 0;
 
-
-var npc = {
-        x: Math.random() * (width - npcCharacterWidth),
-        y: Math.random() * (height - npcCharacterHeight),
-        width: npcCharacterWidth,
-        height: npcCharacterHeight
-    };
-
-var npc2 = {
-        x: Math.random() * (width - characterWidth),
-        y: Math.random() * (height - characterHeight),
-        width: characterWidth,
-        height: characterHeight
-    };
 
 window.addEventListener("keydown", function (e) {
     "use strict";
