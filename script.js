@@ -22,34 +22,38 @@ var characterWidth = width * 0.03;
 var npcCharacterHeight = width * 0.03;
 var npcCharacterWidth = width * 0.03;
 
-var player = {
-    x: 40,
-    y: 40,
-    width: characterWidth,
-    height: characterHeight
-};
-
-
-
+var backgroundImage = document.getElementById('backgroundImage');
+var playerImage = document.getElementById('playerImage');
+var npcImage = document.getElementById('npcImage');
+var npc2Image = document.getElementById('npc2Image');
 
 var score = 0;
 var uncertainty = 0.1;
 var fontsize = 32;
 var highscore = 0;
 
+var player = {
+    x: 40,
+    y: 40,
+    width: characterWidth,
+    height: characterHeight,
+    image: playerImage
+};
 
 var npc = {
         x: Math.random() * (width - npcCharacterWidth),
         y: Math.random() * (height - npcCharacterHeight),
         width: npcCharacterWidth,
-        height: npcCharacterHeight
+        height: npcCharacterHeight,
+        image: npcImage
     };
 
 var npc2 = {
         x: Math.random() * (width - characterWidth),
         y: Math.random() * (height - characterHeight),
         width: characterWidth,
-        height: characterHeight
+        height: characterHeight,
+        image: npc2Image
     };
 
 window.addEventListener("keydown", function (e) {
@@ -153,12 +157,15 @@ function makeCharacter(character, color) {
     context.fillRect(character.x, character.y, character.width, character.height);
 }
 
+function makeCharacterWithImage(character) {
+    "use strict";
+    context.drawImage(character.image, character.x, character.y, character.width, character.height);
+}
+
 function clearCanvas() {
     "use strict";
-    if (player.x >= npc.x) {
-        npc.x = npc.x - (speed * 2 / 3);
-    }
-    context.clearRect(0, 0, width, height);
+    //context.clearRect(0, 0, width, height);
+    context.drawImage(backgroundImage, 0, 0, width, height);
 }
 
 function bounds(character, distance) {
@@ -251,9 +258,10 @@ function shrinkPlayer(score) {
 function render() {
     "use strict";
     clearCanvas();
-    makeCharacter(player, "rgb(21, 206, 246)");
-    makeCharacter(npc, "rgb(20, 255, 0)");
-    makeCharacter(npc2, "rgb(255, 0, 0)");
+    //makeCharacter(player, "rgb(21, 206, 246)"); //If we just want a rectangle
+    makeCharacterWithImage(player);
+    makeCharacterWithImage(npc);
+    makeCharacterWithImage(npc2);
     makeScore(score);
     updateHScore();
     makeHighScore();
