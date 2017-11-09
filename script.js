@@ -1,4 +1,5 @@
 /*jslint browser:true */
+/*global window */
 var canvas = document.getElementById("mainCanvas");
 var cookie = document.cookie;
 canvas.width = window.innerWidth - 20;
@@ -7,11 +8,11 @@ var context = canvas.getContext("2d");
 
 var keys = [];
 var touches = {
-        x1: undefined,
-        y1: undefined,
-        x2: undefined,
-        y2: undefined
-    };
+    x1: undefined,
+    y1: undefined,
+    x2: undefined,
+    y2: undefined
+};
 
 var width = canvas.width;
 var speed = width * 0.005;
@@ -22,10 +23,10 @@ var characterWidth = width * 0.03;
 var npcCharacterHeight = width * 0.03;
 var npcCharacterWidth = width * 0.03;
 
-var backgroundImage = document.getElementById('backgroundImage');
-var playerImage = document.getElementById('playerImage');
-var npcImage = document.getElementById('npcImage');
-var npc2Image = document.getElementById('npc2Image');
+var backgroundImage = document.getElementById("backgroundImage");
+var playerImage = document.getElementById("playerImage");
+var npcImage = document.getElementById("npcImage");
+var npc2Image = document.getElementById("npc2Image");
 
 var score = 0;
 var uncertainty = 0.1;
@@ -41,20 +42,20 @@ var player = {
 };
 
 var npc = {
-        x: Math.random() * (width - npcCharacterWidth),
-        y: Math.random() * (height - npcCharacterHeight),
-        width: npcCharacterWidth,
-        height: npcCharacterHeight,
-        image: npcImage
-    };
+    x: Math.random() * (width - npcCharacterWidth),
+    y: Math.random() * (height - npcCharacterHeight),
+    width: npcCharacterWidth,
+    height: npcCharacterHeight,
+    image: npcImage
+};
 
 var npc2 = {
-        x: Math.random() * (width - characterWidth),
-        y: Math.random() * (height - characterHeight),
-        width: characterWidth,
-        height: characterHeight,
-        image: npc2Image
-    };
+    x: Math.random() * (width - characterWidth),
+    y: Math.random() * (height - characterHeight),
+    width: characterWidth,
+    height: characterHeight,
+    image: npc2Image
+};
 
 window.addEventListener("keydown", function (e) {
     "use strict";
