@@ -30,24 +30,6 @@ var player = {
 };
 
 
-function shrinkPlayer(score) {
-    if (score >= 0 && score < 35) {
-        characterHeight = width * 0.03 * ((100-(2*score))/100);
-        characterWidth = width * 0.03 * ((100-(2*score))/100);
-        npc.height = npcCharacterHeight;
-        npc.width = npcCharacterWidth;
-    } /* else if (score >= 0 && score < 70) {
-        npcCharacterHeight = width * 0.03 * ((100-(2*(score-35)))/100);
-        npcCharacterWidth = width * 0.03 * ((100-(2*(score-35)))/100);
-        npc.height = npcCharacterHeight;
-        npc.width = npcCharacterWidth;
-    }*/ else {
-        player.height = characterHeight;
-        player.width = characterWidth;
-        npc.height = npcCharacterHeight;
-        npc.width = npcCharacterWidth;
-    }
-}
 
 
 var score = 0;
@@ -227,7 +209,7 @@ function processHurt() {
 
 function processEaster() {
     "use strict";
-    score = score + 10;
+    score = score + 2;
     npc2.x = Math.random() * (width - 20);
     npc2.y = Math.random() * (height - 20);
 }
@@ -247,6 +229,25 @@ function updateHScore() {
     };
 }
 
+function shrinkPlayer(score) {
+    if (score >= 0 && score < 35) {
+        characterHeight = width * 0.03 * ((100-(2*score))/100);
+        characterWidth = width * 0.03 * ((100-(2*score))/100);
+        npc.height = npcCharacterHeight;
+        npc.width = npcCharacterWidth;
+    } /* else if (score >= 0 && score < 70) {
+        npcCharacterHeight = width * 0.03 * ((100-(2*(score-35)))/100);
+        npcCharacterWidth = width * 0.03 * ((100-(2*(score-35)))/100);
+        npc.height = npcCharacterHeight;
+        npc.width = npcCharacterWidth;
+    }*/ else {
+        player.height = characterHeight;
+        player.width = characterWidth;
+        npc.height = npcCharacterHeight;
+        npc.width = npcCharacterWidth;
+    }
+}
+
 function render() {
     "use strict";
     clearCanvas();
@@ -256,7 +257,7 @@ function render() {
     makeScore(score);
     updateHScore();
     makeHighScore();
-    shrinkPlayer(score);
+    //shrinkPlayer(score);
 }
 
 
